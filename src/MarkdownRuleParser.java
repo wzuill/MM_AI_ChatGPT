@@ -62,8 +62,8 @@ public class MarkdownRuleParser {
         rules.put(key, rule);
     }
 
-    // Example RuleLoader usage
-    public static void registerRules(Map<RuleLoader.RuleKey, DeductionRule> rules) {
+    // Delegated usage in RuleLoader
+    public static void registerRulesInto(Map<RuleLoader.RuleKey, DeductionRule> rules) {
         registerRule(rules, RuleLoader.GuessPatternType.TWO_COLOR, new Feedback(0, 0), "Locked_2_color_matrices.md", "(0,0)");
         // Add more rules here...
     }
