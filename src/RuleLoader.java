@@ -35,7 +35,8 @@ public class RuleLoader {
     }
 
     private void registerRules() {
-        rules.put(new RuleKey(GuessPatternType.TWO_COLOR, new Feedback(0, 0)), new Rule_2Color_0_0());
+        rules.put(new RuleKey(GuessPatternType.TWO_COLOR, new Feedback(0, 0)), CanonicalMatrixRule.for2Color_0_0());
+
         // Add other rules here later...
     }
 

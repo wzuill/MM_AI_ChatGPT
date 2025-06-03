@@ -17,15 +17,16 @@ public class RuleLoaderTest {
     }
 
     @Test
-    void testGetRuleReturnsCorrectRule() {
+    void testGetRuleReturnsCanonicalRuleForKnownPattern() {
         RuleLoader loader = new RuleLoader();
         Guess guess = new Guess(4, 5, 4, 5);
         Feedback feedback = new Feedback(0, 0);
 
         DeductionRule rule = loader.getRule(guess, feedback);
         assertNotNull(rule);
-        assertTrue(rule instanceof Rule_2Color_0_0);
+        assertTrue(rule instanceof CanonicalMatrixRule);
     }
+
 
     @Test
     void testGetRuleThrowsOnMissingRule() {
@@ -37,4 +38,16 @@ public class RuleLoaderTest {
             loader.getRule(guess, feedback);
         });
     }
+
+    @Test
+    void testGetRuleAppliesWithoutError() {
+        RuleLoader loader = new RuleLoader();
+        Guess guess = new Guess(4, 5, 4, 5);
+        Feedback feedback = new Feedback(0, 0);
+        DeductionState state = new DeductionState();
+
+        DeductionRule rule = loader.getRule(guess, feedback);
+        assertDoesNotThrow(() -> rule.apply(guess, feedback, state));
+    }
+
 }
