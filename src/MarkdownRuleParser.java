@@ -5,9 +5,13 @@ import java.io.IOException;
 
 public class MarkdownRuleParser {
 
-    public static CanonicalMatrixRule fromMarkdownFile(Path path, String feedbackLabel) throws IOException {
-        String content = Files.readString(path);
-        return fromMarkdownSection(content, feedbackLabel);
+    public static CanonicalMatrixRule fromMarkdownFile(Path path, String feedbackLabel) {
+        try {
+            String content = Files.readString(path);
+            return fromMarkdownSection(content, feedbackLabel);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read markdown file: " + path, e);
+        }
     }
 
     public static CanonicalMatrixRule fromMarkdownSection(String markdown, String feedbackLabel) {
@@ -45,4 +49,3 @@ public class MarkdownRuleParser {
         return new CanonicalMatrixRule(entries);
     }
 }
-
