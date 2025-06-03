@@ -14,6 +14,10 @@ public class MarkdownRuleParser {
         }
     }
 
+    public static CanonicalMatrixRule fromMarkdownFile(String filename, String feedbackLabel) {
+        return fromMarkdownFile(Path.of(filename), feedbackLabel);
+    }
+
     public static CanonicalMatrixRule fromMarkdownSection(String markdown, String feedbackLabel) {
         List<CanonicalMatrixRule.DeductionEntry> entries = new ArrayList<>();
 
