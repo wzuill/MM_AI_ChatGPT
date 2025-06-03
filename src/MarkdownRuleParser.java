@@ -52,4 +52,13 @@ public class MarkdownRuleParser {
         if (entries.isEmpty()) throw new IllegalArgumentException("No deduction entries found for: " + feedbackLabel);
         return new CanonicalMatrixRule(entries);
     }
+
+    // Integration for RuleLoader usage
+    public static void registerRule(Map<RuleLoader.RuleKey, DeductionRule> rules,
+                                    RuleLoader.GuessPatternType type, Feedback feedback,
+                                    String filename, String feedbackLabel) {
+        RuleLoader.RuleKey key = new RuleLoader.RuleKey(type, feedback);
+        CanonicalMatrixRule rule = fromMarkdownFile(filename, feedbackLabel);
+        rules.put(key, rule);
+    }
 }
