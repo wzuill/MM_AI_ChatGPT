@@ -23,13 +23,16 @@ public class MarkdownRuleParser {
 
         String[] lines = markdown.split("\\R");
         boolean inSection = false;
+        String normalizedLabel = feedbackLabel.replaceAll("\\s+", "");
 
         for (String line : lines) {
-            if (line.trim().equalsIgnoreCase("## Feedback " + feedbackLabel)) {
+            String trimmed = line.trim();
+            if (trimmed.matches("^#{2,3} Feedback \\\\(\\s*\\d\\s*,\\s*\\d\\s*\\\\)$") &&
+                    trimmed.replaceAll("\\s+", "").contains("Feedback" + normalizedLabel)) {
                 inSection = true;
                 continue;
             }
-            if (inSection && line.startsWith("## ")) {
+            if (inSection && trimmed.startsWith("## ")) {
                 break; // End of section
             }
             if (inSection && line.matches("\\|\\s*[A-Z]\\s*\\|.*")) {
