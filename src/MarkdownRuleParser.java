@@ -61,4 +61,10 @@ public class MarkdownRuleParser {
         CanonicalMatrixRule rule = fromMarkdownFile(filename, feedbackLabel);
         rules.put(key, rule);
     }
+
+    // Example RuleLoader usage
+    public static void registerRules(Map<RuleLoader.RuleKey, DeductionRule> rules) {
+        registerRule(rules, RuleLoader.GuessPatternType.TWO_COLOR, new Feedback(0, 0), "Locked_2_color_matrices.md", "(0,0)");
+        // Add more rules here...
+    }
 }
